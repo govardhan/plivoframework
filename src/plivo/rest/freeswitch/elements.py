@@ -931,6 +931,8 @@ class Dial(Element):
                 event = outbound_socket.wait_for_action(timeout=30, raise_on_hangup=True)
                 if event.is_empty():
                     continue
+                else:
+                    break
 
             # parse received events
             if event['Event-Name'] == 'CHANNEL_UNBRIDGE':
