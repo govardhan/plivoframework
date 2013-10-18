@@ -182,7 +182,7 @@ class PlivoOutboundEventSocket(OutboundEventSocket):
     # method will put that event in the queue, then we may continue working.
     # However, other events will still come, like for instance, DTMF.
     def on_channel_execute_complete(self, event):
-        if event['Application'] in self.WAIT_FOR_ACTIONS:
+        if event['Application'] in self.WAIT_FOR_ACTIONS or event['variable_current_application'] in self.WAIT_FOR_ACTIONS:
             # If transfer has begun, put empty event to break current action
             if event['variable_plivo_transfer_progress'] == 'true':
                 self._action_queue.put(Event())
